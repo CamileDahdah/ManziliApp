@@ -6,7 +6,7 @@ import com.google.gson.annotations.SerializedName;
  * Created by camilledahdah on 3/9/18.
  */
 
-class AlternativeSpeechResult {
+public class AlternativeSpeechResult {
 
     @SerializedName("transcript")
     private String transcript;
