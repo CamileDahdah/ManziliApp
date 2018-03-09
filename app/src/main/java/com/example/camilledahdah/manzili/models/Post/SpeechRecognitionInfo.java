@@ -1,4 +1,6 @@
-package com.example.camilledahdah.manzili.models;
+package com.example.camilledahdah.manzili.models.Post;
+
+import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
 
@@ -8,18 +10,19 @@ import java.io.Serializable;
 
 public class SpeechRecognitionInfo implements Serializable{
 
+    @SerializedName("config")
     private SpeechConfiguration speechConfiguration;
 
-
+    @SerializedName("audio")
     private SpeechAudio speechAudio;
 
 
-    public void setSpeechConfiguration(SpeechConfiguration speechConfigurations) {
-    //    this.speechConfiguration = speechConfiguration;
+    public void setSpeechConfiguration(SpeechConfiguration speechConfiguration) {
+        this.speechConfiguration = speechConfiguration;
     }
 
     public void setSpeechAudio(SpeechAudio speechAudio) {
-      //  this.speechAudio = speechAudio;
+        this.speechAudio = speechAudio;
     }
 
     public SpeechConfiguration getSpeechConfiguration() {

@@ -1,4 +1,6 @@
-package com.example.camilledahdah.manzili.models;
+package com.example.camilledahdah.manzili.models.Post;
+
+import com.google.gson.annotations.SerializedName;
 
 /**
  * Created by camilledahdah on 3/9/18.
@@ -6,6 +8,7 @@ package com.example.camilledahdah.manzili.models;
 
 public class SpeechAudio {
 
+    @SerializedName("content")
     String content;
 
     public void setContent(String content) {

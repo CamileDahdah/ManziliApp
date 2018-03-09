@@ -1,4 +1,6 @@
-package com.example.camilledahdah.manzili.models;
+package com.example.camilledahdah.manzili.models.Post;
+
+import com.google.gson.annotations.SerializedName;
 
 /**
  * Created by camilledahdah on 3/9/18.
@@ -6,9 +8,14 @@ package com.example.camilledahdah.manzili.models;
 
 public class SpeechConfiguration {
 
+    @SerializedName("encoding")
     String encoding;
+
+    @SerializedName("sampleRateHertz")
     String sampleRateHertz;
-    String language_code;
+
+    @SerializedName("language_code")
+    String languageCode;
 
     public void setEncoding(String encoding) {
         this.encoding = encoding;
@@ -19,7 +26,7 @@ public class SpeechConfiguration {
     }
 
     public void setLanguage_code(String language_code) {
-        this.language_code = language_code;
+        this.languageCode = language_code;
     }
 
     public String getEncoding() {
@@ -31,6 +38,6 @@ public class SpeechConfiguration {
     }
 
     public String getLanguage_code() {
-        return language_code;
+        return languageCode;
     }
 }
