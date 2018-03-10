@@ -65,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-                wavRecorder.stopRecording();
+                //wavRecorder.stopRecording();
 
                 SpeechRecognitionInfo speechRecognitionInfo = new SpeechRecognitionInfo();
                 SpeechConfiguration speechConfiguration = new SpeechConfiguration();

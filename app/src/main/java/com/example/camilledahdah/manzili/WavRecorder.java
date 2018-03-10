@@ -12,6 +12,7 @@ import android.media.AudioFormat;
 import android.media.AudioRecord;
 import android.media.MediaRecorder;
 import android.os.Environment;
+import android.util.Log;
 
 import com.example.camilledahdah.manzili.Activities.MainActivity;
 
@@ -70,7 +71,11 @@ public class WavRecorder {
             e.printStackTrace();
         }
 
-        return (file.getAbsolutePath() + "/" + AUDIO_RECORDER_TEMP_FILE);
+        if (tempFile.exists()) {
+            Log.d("s","s");
+        }
+
+        return (tempFile.toString());
     }
 
     public void startRecording() {
@@ -137,8 +142,11 @@ public class WavRecorder {
             isRecording = false;
 
             int i = recorder.getState();
-            if (i == 1)
+
+            if (i == 1) {
                 recorder.stop();
+            }
+
             recorder.release();
 
             recorder = null;
