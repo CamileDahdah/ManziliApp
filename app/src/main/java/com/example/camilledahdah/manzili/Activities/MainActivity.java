@@ -19,6 +19,8 @@ import com.example.camilledahdah.manzili.models.Post.SpeechConfiguration;
 import com.example.camilledahdah.manzili.models.Post.SpeechRecognitionInfo;
 import com.example.camilledahdah.manzili.models.Response.SpeechResponse;
 
+import org.apache.commons.io.FileUtils;
+
 import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -52,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
                     REQUEST_MICROPHONE);
         }
 
-        final WavRecorder wavRecorder = new WavRecorder("path_to_file.wav", this);
+        final WavRecorder wavRecorder = new WavRecorder(this);
 
         wavRecorder.startRecording();
 
@@ -61,11 +63,12 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void run() {
                 try {
-                    Thread.sleep(5000);
+                    Thread.sleep(1000);
+                    wavRecorder.stopRecording();
+                    Thread.sleep(1000);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-                //wavRecorder.stopRecording();
 
                 SpeechRecognitionInfo speechRecognitionInfo = new SpeechRecognitionInfo();
                 SpeechConfiguration speechConfiguration = new SpeechConfiguration();
@@ -76,26 +79,19 @@ public class MainActivity extends AppCompatActivity {
                 speechConfiguration.setSampleRateHertz("16000");
 
 
-                File file = new File(wavRecorder.getFilename());
+                File file = new File(wavRecorder.getTempFileName());
                 int size = (int) file.length();
-                byte[] bytes = new byte[size];
+
+                String base64Speech = "";
 
                 try {
-                    BufferedInputStream buf = new BufferedInputStream(new FileInputStream(file));
-                    buf.read(bytes, 0, bytes.length);
-                    buf.close();
-                } catch (FileNotFoundException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
+                    byte[] bytes = FileUtils.readFileToByteArray(file);
+                    base64Speech = Base64.encodeToString(bytes, Base64.DEFAULT);
                 } catch (IOException e) {
-                    // TODO Auto-generated catch block
                     e.printStackTrace();
                 }
 
-
-                String base64Speech = Base64.encodeToString(bytes, Base64.DEFAULT);
-
-                Log.d("s", "succcess! " + base64Speech);
+                Log.d("s", base64Speech);
                 speechAudio.setContent(base64Speech);
                 speechRecognitionInfo.setSpeechAudio(speechAudio);
                 speechRecognitionInfo.setSpeechConfiguration(speechConfiguration);

@@ -35,6 +35,6 @@ dependencies {
     compile 'com.google.code.gson:gson:2.8.1'
 
     compile 'com.airbnb.android:lottie:2.5.0-rc1'
-
+    compile 'commons-io:commons-io:2.4'
     compile 'com.squareup.picasso:picasso:2.5.2'
 }
