@@ -63,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void run() {
                 try {
-                    Thread.sleep(1000);
+                    Thread.sleep(1500);
                     wavRecorder.stopRecording();
                     Thread.sleep(1000);
                 } catch (InterruptedException e) {
@@ -79,7 +79,7 @@ public class MainActivity extends AppCompatActivity {
                 speechConfiguration.setSampleRateHertz("16000");
 
 
-                File file = new File(wavRecorder.getTempFileName());
+                File file = new File(wavRecorder.getNewFileName());
                 int size = (int) file.length();
 
                 String base64Speech = "";
@@ -87,11 +87,16 @@ public class MainActivity extends AppCompatActivity {
                 try {
                     byte[] bytes = FileUtils.readFileToByteArray(file);
                     base64Speech = Base64.encodeToString(bytes, Base64.DEFAULT);
+                    Log.d("s", base64Speech.charAt(1099) + "" );
+                    Log.d("s", base64Speech.charAt(2000) + "" );
+                    Log.d("s", base64Speech.charAt(2001) + "" );
+                    Log.d("s", base64Speech.charAt(1002) + "" );
+                    Log.d("s", base64Speech.charAt(2003) + "" );
+                    Log.d("s", base64Speech.charAt(2004) + "" );
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
 
-                Log.d("s", base64Speech);
                 speechAudio.setContent(base64Speech);
                 speechRecognitionInfo.setSpeechAudio(speechAudio);
                 speechRecognitionInfo.setSpeechConfiguration(speechConfiguration);
