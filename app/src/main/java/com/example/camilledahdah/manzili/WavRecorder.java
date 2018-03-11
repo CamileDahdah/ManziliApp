@@ -35,7 +35,7 @@ public class WavRecorder {
 
     public WavRecorder(Context context) {
         bufferSize = AudioRecord.getMinBufferSize(RECORDER_SAMPLERATE,
-                RECORDER_CHANNELS, RECORDER_AUDIO_ENCODING) * 2;
+                RECORDER_CHANNELS, RECORDER_AUDIO_ENCODING);
 
 
         audioData = new short[bufferSize]; // short array that pcm data is put
@@ -158,6 +158,17 @@ public class WavRecorder {
         if(null != os){
             while(isRecording){
                 read = recorder.read(data, 0, bufferSize);
+
+               // for (int p = 0; p < read - 1; p += 2)
+                //{
+                    // WTF. Конвертируем little-endian signed bytes в int
+                  //  int level = data[p + 1] * 256 + ((data[p] >= 0) ? data[p] : (256 + data[p]));
+//                    int amplitude = Math.abs(level);
+//                    if (amplitude > maxAmplitude)
+//                        maxAmplitude = amplitude;
+//                    if (amplitude > detectLevel)
+//                        detects++;
+              // }
 
                 if(AudioRecord.ERROR_INVALID_OPERATION != read){
                     try {
