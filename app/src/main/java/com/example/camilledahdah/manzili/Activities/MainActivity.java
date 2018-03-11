@@ -14,6 +14,7 @@ import android.util.Base64InputStream;
 import android.util.Log;
 import android.widget.TextView;
 import com.example.camilledahdah.manzili.R;
+import com.example.camilledahdah.manzili.ReadImageSequences;
 import com.example.camilledahdah.manzili.WavRecorder;
 import com.example.camilledahdah.manzili.api.speechrecognition.SpeechRecognitionAPI;
 import com.example.camilledahdah.manzili.models.Post.SpeechAudio;
@@ -61,6 +62,9 @@ public class MainActivity extends AppCompatActivity {
                     REQUEST_MICROPHONE);
         }
 
+        ReadImageSequences readImageSequences = new ReadImageSequences(this);
+        readImageSequences.animateImages("Chair");
+
         final WavRecorder wavRecorder = new WavRecorder(this);
 
         final Recorder recorder = OmRecorder.wav(
@@ -83,10 +87,9 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void run() {
                 try {
-                    Thread.sleep(1500);
+                    Thread.sleep(5000);
                     //wavRecorder.stopRecording();
                     recorder.stopRecording();
-                    Thread.sleep(1000);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 } catch (IOException e) {
@@ -165,7 +168,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void animateVoice(float v) {
-        Log.d("voice", "voice: " + v);
+        //Log.d("voice", "voice: " + v);
     }
 
 
