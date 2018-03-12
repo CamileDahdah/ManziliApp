@@ -1,0 +1,104 @@
+{
+    "objects": [
+        {
+            "id": "Sofa",
+            "lbArabicWord": "كنب",
+            "visited": false
+        },
+        {
+            "id": "Table",
+            "lbArabicWord": "طاوله",
+            "visited": false
+        },
+        {
+            "id": "Dining Table",
+            "lbArabicWord": "طاوله طعام",
+            "visited": false
+        },
+        {
+            "id": "Chair",
+            "lbArabicWord": "كرسي",
+            "visited": false
+        },
+        {
+            "id": "Closet",
+            "lbArabicWord": "خزانه",
+            "visited": false
+        },
+        {
+            "id": "Lamp",
+            "lbArabicWord": "مصباح",
+            "visited": false
+        },
+        {
+            "id": "Floor Lamp",
+            "lbArabicWord": "مصباح ارضي",
+            "visited": false
+        },
+        {
+            "id": "Curtain",
+            "lbArabicWord": "ستار",
+            "visited": false
+        },
+        {
+            "id": "Vase",
+            "lbArabicWord": "مزهريه",
+            "visited": false
+        },
+        {
+            "id": "Clock",
+            "lbArabicWord": "ساعه",
+            "visited": false
+        },
+        {
+            "id": "Sofa",
+            "lbArabicWord": "كنب",
+            "visited": false
+        },
+        {
+            "id": "Plant",
+            "lbArabicWord": "نبات",
+            "visited": false
+        },
+        {
+            "id": "Plant02",
+            "lbArabicWord": "نبات",
+            "visited": false
+        },
+        {
+            "id": "Television",
+            "lbArabicWord": "تلفزيون",
+            "visited": false
+        },
+        {
+            "id": "FramePicture",
+            "lbArabicWord": "صوره",
+            "visited": false
+        },
+        {
+            "id": "Plate",
+            "lbArabicWord": "صحن",
+            "visited": false
+        },
+        {
+            "id": "Fork",
+            "lbArabicWord": "شوكه",
+            "visited": false
+        },
+        {
+            "id": "Knife",
+            "lbArabicWord": "سكين",
+            "visited": false
+        },
+        {
+            "id": "Spoon",
+            "lbArabicWord": "ملعقه",
+            "visited": false
+        },
+        {
+            "id": "Flower",
+            "lbArabicWord": "زهره",
+            "visited": false
+        }
+    ]
+}

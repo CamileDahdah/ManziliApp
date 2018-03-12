@@ -26,6 +26,7 @@ public class ReadImageSequences extends Activity{
 
     Context context;
     ImageView imageView;
+    InputStream inputStream;
 
     // File representing the folder that you select using a FileChooser
     static String dir = "";
@@ -98,7 +99,7 @@ public class ReadImageSequences extends Activity{
         if (fileName.endsWith(".png")) {
 
             try {
-                InputStream inputStream = context.getAssets().open(dir + "/" + dirName + "/" + fileName);
+                inputStream = context.getAssets().open(dir + "/" + dirName + "/" + fileName);
 
                 if (inputStream == null) {
                     //tem.out.println("file is not png");
@@ -122,7 +123,7 @@ public class ReadImageSequences extends Activity{
                 }
 
                 try {
-                    Thread.sleep (1000 / 60);
+                    Thread.sleep (17);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }

@@ -29,4 +29,18 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/chair_0236" />
 
+    <Button
+        android:id="@+id/speak_button"
+        android:layout_width="130dp"
+        android:layout_height="130dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/speak_button"
+        android:paddingBottom="9dp"
+        android:text="Speak"
+        android:textColor="@android:color/white"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/spriteImage" />
+
 </android.support.constraint.ConstraintLayout>

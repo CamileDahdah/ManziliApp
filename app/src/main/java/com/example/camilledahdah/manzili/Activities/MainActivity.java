@@ -2,16 +2,15 @@ package com.example.camilledahdah.manzili.Activities;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
+import android.graphics.Typeface;
 import android.media.AudioFormat;
 import android.media.MediaRecorder;
-import android.os.Debug;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Base64;
-import android.util.Base64InputStream;
-import android.util.Log;
+import android.widget.Button;
 import android.widget.TextView;
 import com.example.camilledahdah.manzili.R;
 import com.example.camilledahdah.manzili.ReadImageSequences;
@@ -22,11 +21,8 @@ import com.example.camilledahdah.manzili.models.Post.SpeechConfiguration;
 import com.example.camilledahdah.manzili.models.Post.SpeechRecognitionInfo;
 import com.example.camilledahdah.manzili.models.Response.SpeechResponse;
 import org.apache.commons.io.FileUtils;
-import com.google.protobuf.ByteString;
-import java.io.BufferedInputStream;
+
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import omrecorder.AudioChunk;
@@ -51,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        InitializeVariables();
+        initializeVariables();
 
 
         if (ContextCompat.checkSelfPermission(this,
@@ -80,7 +76,7 @@ public class MainActivity extends AppCompatActivity {
                 }), new File(getFilesDir(), "testing.wav"));
 
         recorder.startRecording();
-        //wavRecorder.startRecording();
+
 
         new Thread(new Runnable() {
 
@@ -88,7 +84,7 @@ public class MainActivity extends AppCompatActivity {
             public void run() {
                 try {
                     Thread.sleep(5000);
-                    //wavRecorder.stopRecording();
+
                     recorder.stopRecording();
                 } catch (InterruptedException e) {
                     e.printStackTrace();
@@ -111,6 +107,7 @@ public class MainActivity extends AppCompatActivity {
                 String base64Speech = "";
 
                 try {
+
                     byte[] bytes = FileUtils.readFileToByteArray( new File (getFilesDir(), "testing.wav") );
                     base64Speech = Base64.encodeToString(bytes, Base64.NO_WRAP);//STUPID BUG Base64.NO_WRAP
 
@@ -172,8 +169,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    private void InitializeVariables() {
+    private void initializeVariables() {
         speechText = findViewById(R.id.speech_text);
+        Button speakButton = findViewById(R.id.speak_button);
+        Typeface englishTypeFace = Typeface.createFromAsset(getAssets(), "fonts/gogono_cocoa_mochi.ttf");
+        Typeface arabicTypeFace = Typeface.createFromAsset(getAssets(), "fonts/b_arabics.ttf");
+
+        speakButton.setTypeface(englishTypeFace);
+        speechText.setTypeface(arabicTypeFace);
     }
 
 }
