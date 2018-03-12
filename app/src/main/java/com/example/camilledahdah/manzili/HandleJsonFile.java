@@ -29,6 +29,7 @@ public class HandleJsonFile {
     public HandleJsonFile(Context context){
         this.context = context;
         writePath =  context.getFilesDir().getAbsolutePath() + fileName;
+        loadJSONFromAsset();
     }
 
     public void loadJSONFromAsset() {
@@ -51,7 +52,7 @@ public class HandleJsonFile {
 
             Gson gson = new Gson();
 
-           objectList = gson.fromJson(json, ObjectList.class);
+            objectList = gson.fromJson(json, ObjectList.class);
 
 
 
@@ -71,7 +72,7 @@ public class HandleJsonFile {
         this.objectList = objectList;
     }
 
-    public ObjectData GetObjectData(String id){
+    public ObjectData getObjectData(String id){
 
         int counter = 0;
 
@@ -86,6 +87,12 @@ public class HandleJsonFile {
         }
 
         return null;
+    }
+
+    public ObjectData getCurrentObjectData(){
+
+        return objectList.getObjectsList().get(currentObject);
+
     }
 
     public void setVisitedObject(boolean visited){

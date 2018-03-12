@@ -1,6 +1,8 @@
 package com.example.camilledahdah.manzili.Activities;
 
 import android.Manifest;
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
 import android.app.Activity;
 import android.content.Context;
 import android.content.pm.PackageManager;
@@ -12,10 +14,21 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Html;
 import android.util.Base64;
 import android.view.View;
+import android.view.animation.AccelerateInterpolator;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
+import android.view.animation.AnimationSet;
+import android.view.animation.AnimationUtils;
+import android.view.animation.DecelerateInterpolator;
 import android.widget.Button;
 import android.widget.TextView;
+
+import com.airbnb.lottie.LottieDrawable;
+import com.example.camilledahdah.manzili.ArabicText;
+import com.example.camilledahdah.manzili.HandleJsonFile;
 import com.example.camilledahdah.manzili.R;
 import com.example.camilledahdah.manzili.ReadImageSequences;
 import com.example.camilledahdah.manzili.WavRecorder;
@@ -45,20 +58,19 @@ public class MainActivity extends AppCompatActivity {
     final int REQUEST_MICROPHONE = 1;
     TextView speechText;
     boolean microphonePermission;
-    Bitmap buttonEnabled, buttonDisabled;
     Recorder recorder ;
     SpeechAudio speechAudio;
     Button speakButton;
     SpeechRecognitionInfo speechRecognitionInfo;
     boolean isRecording;
+    TextView youSaid;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_mainn);
 
         initializeVariables();
-
 
         checkMicrophonePermission();
 
@@ -68,6 +80,7 @@ public class MainActivity extends AppCompatActivity {
         initializeSpeechInfo();
 
         initializeRecorder();
+
         final myThread resultThread = new myThread(speechAudio, recorder, speechRecognitionInfo, this, speechText);
 
             speakButton.setOnClickListener(new View.OnClickListener() {
@@ -80,15 +93,24 @@ public class MainActivity extends AppCompatActivity {
                             isRecording = true;
                             initializeRecorder();
                             speakButton.setBackgroundResource(R.drawable.speak_button);
+                            speakButton.setText("");
+                            youSaid.setText("");
+                            speakButton.startAnimation(AnimationUtils.loadAnimation(MainActivity.this, R.anim.buttonanim));
                             recorder.startRecording();
 
+
                         } else {
+                            speakButton.clearAnimation();
                             isRecording = false;
                             speakButton.setBackgroundResource(R.drawable.blackbutton);
+                            speakButton.setText("Tap");
                             resultThread.setRecorder(recorder);
                             resultThread.run();
 
                         }
+
+                    }else{
+                        checkMicrophonePermission();
 
                     }
 
@@ -134,12 +156,15 @@ public class MainActivity extends AppCompatActivity {
 
         isRecording = false;
         microphonePermission = false;
+        youSaid = findViewById(R.id.you_said);
         speechText = findViewById(R.id.speech_text);
         speakButton = findViewById(R.id.speak_button);
         Typeface englishTypeFace = Typeface.createFromAsset(getAssets(), "fonts/gogono_cocoa_mochi.ttf");
         Typeface arabicTypeFace = Typeface.createFromAsset(getAssets(), "fonts/b_arabics.ttf");
 
         speakButton.setBackgroundResource(R.drawable.blackbutton);
+        speakButton.setText("Tap");
+        youSaid.setText("");
 
         speakButton.setTypeface(englishTypeFace);
         speechText.setTypeface(arabicTypeFace);
@@ -160,6 +185,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
+
 
     public void initializeRecorder(){
 
@@ -246,7 +272,19 @@ public class MainActivity extends AppCompatActivity {
                             ((Activity) context).runOnUiThread(new Runnable() {
                                 @Override
                                 public void run() {
-                                    speechText.setText(text);
+
+                                    HandleJsonFile handleJsonFile = new HandleJsonFile(context);
+                                    String correctWord = handleJsonFile.getCurrentObjectData().getLbArabicWord();
+
+                                    ArabicText.TextResponse textResponse = ArabicText.detectArabicWords(text, correctWord);
+
+                                    if(!textResponse.isCorrect()) {
+                                        youSaid.setText("Incorrect Word");
+                                    }else{
+                                        youSaid.setText("Correct Word");
+                                    }
+                                    speechText.setText(Html.fromHtml( textResponse.getFinalTextResult() ));
+
                                 }
                             });
 

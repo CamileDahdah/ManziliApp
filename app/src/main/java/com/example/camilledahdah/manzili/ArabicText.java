@@ -1,5 +1,6 @@
 package com.example.camilledahdah.manzili;
 
+import android.text.Html;
 import android.util.Log;
 import android.util.Pair;
 
@@ -10,13 +11,11 @@ import android.util.Pair;
 public class ArabicText {
 
 
-    static String theCorrectWord;
     static float totalScore;
 
 
-    public static void DetectArabicWords (String speechText){
+    public static TextResponse detectArabicWords (String speechText, String theCorrectWord){
 
-        boolean correct = false;
 
         if (speechText != "") {
 
@@ -110,8 +109,9 @@ public class ArabicText {
 
                 //change Color
                 if (colorLastIndex > colorFirstIndex) {
-                    finalText =  new StringBuilder(finalText).insert (colorLastIndex + 1, "</color>").toString();
-                    finalText = new StringBuilder(finalText).insert (colorFirstIndex, "<color=#02dfa5>").toString();
+
+                    finalText =  new StringBuilder(finalText).insert (colorLastIndex + 1, "</font>").toString();
+                    finalText = new StringBuilder(finalText).insert (colorFirstIndex, "<font color=#02dfa5>").toString();
                 }
 
                 speechText = speechText.replace (speechWord, finalText);
@@ -121,52 +121,27 @@ public class ArabicText {
 
             setTotalScore (theLetterCounter);
 
-            setText (speechText);
-
 
             Log.d ("accuracy", "Current Accuracy: " + getAccuracy() );
             Log.d ("score", "Score (LetterCounter): " + theLetterCounter);
 
             if ( theLetterCounter >= getAccuracy() ) {
-                correct = true;
-                correctAnswer();
+                return new TextResponse(finalText, getAccuracy(), true);
 
             } else {
-                wrongAnswer();
+                return new TextResponse(finalText, getAccuracy(), false);
             }
 
         } else {
-            setText("");
+            return  null;
         }
         
     }
 
 
 
-    private static void wrongAnswer() {
-
-    }
-
-    private static void setText(String speechText) {
-
-
-    }
-
-
-    private static void correctAnswer() {
-
-    }
-
     private static float getAccuracy() {
-        return 0;
-    }
-
-    public static String getTheCorrectWord() {
-        return theCorrectWord;
-    }
-
-    public static void setTheCorrectWord(String correctWord) {
-        theCorrectWord = correctWord;
+        return 100;
     }
 
     public static float getTotalScore() {
@@ -175,6 +150,45 @@ public class ArabicText {
 
     private static void setTotalScore(float score) {
         totalScore = score;
+    }
+
+
+    public static class TextResponse{
+
+        private String finalTextResult;
+        private float accuracy;
+        private boolean correct;
+
+        public TextResponse(String finalTextResult, float accuracy, boolean correct){
+            this.accuracy = accuracy;
+            this.finalTextResult = finalTextResult;
+            this.correct = correct;
+
+        }
+
+        public String getFinalTextResult() {
+            return finalTextResult;
+        }
+
+        public void setFinalTextResult(String finalTextResult) {
+            this.finalTextResult = finalTextResult;
+        }
+
+        public float getAccuracy() {
+            return accuracy;
+        }
+
+        public void setAccuracy(float accuracy) {
+            this.accuracy = accuracy;
+        }
+
+        public boolean isCorrect() {
+            return correct;
+        }
+
+        public void setCorrect(boolean correct) {
+            this.correct = correct;
+        }
     }
 
 

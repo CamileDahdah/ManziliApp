@@ -1,5 +1,12 @@
 {
     "objects": [
+
+        {
+            "id": "Chair",
+            "lbArabicWord": "كرسي",
+            "visited": false
+        },
+
         {
             "id": "Sofa",
             "lbArabicWord": "كنب",
@@ -13,11 +20,6 @@
         {
             "id": "Dining Table",
             "lbArabicWord": "طاوله طعام",
-            "visited": false
-        },
-        {
-            "id": "Chair",
-            "lbArabicWord": "كرسي",
             "visited": false
         },
         {

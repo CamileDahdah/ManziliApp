@@ -28,14 +28,9 @@ public class ReadImageSequences extends Activity{
     ImageView imageView;
     InputStream inputStream;
 
-    // File representing the folder that you select using a FileChooser
     static String dir = "";
     List<String> imageDirNames = null;
     String dirName;
-    // array of supported extensions (use a List if you prefer)
-    static final String[] EXTENSIONS = new String[]{
-            "gif", "png", "bmp" // and other formats you need
-    };
 
 
     public ReadImageSequences(Context context){
