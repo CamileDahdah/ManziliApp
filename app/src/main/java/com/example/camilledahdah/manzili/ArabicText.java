@@ -10,11 +10,11 @@ import android.util.Pair;
 public class ArabicText {
 
 
-    String theCorrectWord;
-    float totalScore;
+    static String theCorrectWord;
+    static float totalScore;
 
 
-    public void DetectArabicWords (String speechText){
+    public static void DetectArabicWords (String speechText){
 
         boolean correct = false;
 
@@ -143,37 +143,37 @@ public class ArabicText {
 
 
 
-    private void wrongAnswer() {
+    private static void wrongAnswer() {
 
     }
 
-    private void setText(String speechText) {
+    private static void setText(String speechText) {
 
 
     }
 
 
-    private void correctAnswer() {
+    private static void correctAnswer() {
 
     }
 
-    private float getAccuracy() {
+    private static float getAccuracy() {
         return 0;
     }
 
-    public String getTheCorrectWord() {
+    public static String getTheCorrectWord() {
         return theCorrectWord;
     }
 
-    public void setTheCorrectWord(String theCorrectWord) {
-        this.theCorrectWord = theCorrectWord;
+    public static void setTheCorrectWord(String correctWord) {
+        theCorrectWord = correctWord;
     }
 
-    public float getTotalScore() {
+    public static float getTotalScore() {
         return totalScore;
     }
 
-    private void setTotalScore(float score) {
+    private static void setTotalScore(float score) {
         totalScore = score;
     }
 
